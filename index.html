@@ -1,0 +1,110 @@
+<html>
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.6.2/fullcalendar.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.6.2/fullcalendar.print.css" media="print">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
+	<link rel="stylesheet" href="./css/style.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.1/moment.min.js"></script>
+	<script src="./js/arrive.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.6.2/fullcalendar.min.js"></script>
+	<script src="./js/jquery.countdown.min.js"></script>
+	<title>Calendar</title>
+</head>
+<body>
+	<div class="container calendar-page">
+		<div class="row">
+			<div id='calendar'></div>
+		</div>
+		<div class="row fav-footer">
+			<div class="col col-2 fav-logo"></div>
+			<div class="col fav-record">
+				<h4>Record</h4>
+				<span></span>
+			</div>
+			<div class="col fav-standing">
+				<h4>Standing in Conference</h4>
+				<span></span>
+			</div>
+			<div class="col fav-nextOp">
+				<h4>Next Oppenant</h4>
+				<span></span>
+			</div>
+		</div>
+		<div id="event-modal" class="modal fade" tabindex="-1" role="dialog">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<div class="game">
+							<img class="rounded-circle" src="http://via.placeholder.com/20x20" alt="">
+							<span>vs</span>
+							<img class="rounded-circle" src="http://via.placeholder.com/20x20" alt="">
+						</div>
+						<div class="game">
+							<img class="rounded-circle" src="http://via.placeholder.com/20x20" alt="">
+							<span>vs</span>
+							<img class="rounded-circle" src="http://via.placeholder.com/20x20" alt="">
+						</div>
+						<div class="game">
+							<img class="rounded-circle" src="http://via.placeholder.com/20x20" alt="">
+							<span>vs</span>
+							<img class="rounded-circle" src="http://via.placeholder.com/20x20" alt="">
+						</div>
+						<div class="game">
+							<img class="rounded-circle" src="http://via.placeholder.com/20x20" alt="">
+							<span>vs</span>
+							<img class="rounded-circle" src="http://via.placeholder.com/20x20" alt="">
+						</div>
+						<div class="game">
+							<img class="rounded-circle" src="http://via.placeholder.com/20x20" alt="">
+							<span>vs</span>
+							<img class="rounded-circle" src="http://via.placeholder.com/20x20" alt="">
+						</div>
+					</div>
+					<div class="modal-body">
+						<span class="place"></span>
+						<span class="countdown"></span>
+						<a href="" class="modal-stats">STATS</a>
+						<div class="row">
+							<div class="col home">
+								<img class="rounded-circle modal-team-logo" src="http://via.placeholder.com/107x107" alt="">
+								<span class="odds home-odds"></span>
+								<div class="roster home-roster"><ul></ul></div>
+							</div>
+							<div class="col away">
+								<img class="rounded-circle modal-team-logo" src="http://via.placeholder.com/107x107" alt="">
+								<span class="odds away-odds"></span>
+								<div class="roster away-roster"><ul></ul></div>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<div class="text-center">
+							<button type="button" class="btn btn-secondary">Streaming</button>
+							<button type="button" class="btn btn-secondary">Buy Tickets</button>
+						</div>
+						<div class="row footer-ava">
+							<div class="col cable">
+								<h4>Cable Available</h4>
+								<ul>
+									<li><img src="http://via.placeholder.com/40x40" alt="">10:00PM</li>
+									<li><img src="http://via.placeholder.com/40x40" alt="">10:00PM</li>
+									<li><img src="http://via.placeholder.com/40x40" alt="">10:00PM</li>
+								</ul>
+							</div>
+							<div class="col bar">
+								<h4>Bar Available</h4>
+								<table></table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+<script src="./js/project.js"></script>
+</body>
+</html>

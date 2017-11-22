@@ -1,0 +1,203 @@
+.calendar-page {
+	margin-top: 20px;
+}
+.fc .fc-toolbar > * > * {
+	float: none;
+}
+.fc-more-cell > div {
+	margin-top: 10px;
+	margin-left: 100px;
+}
+.fc-popover {
+	background-color: #fff;
+	border: 1px solid #d1d1d1;
+}
+.fc-more-popover {
+	width: 125px;
+}
+.fc-header {
+	display: none;
+}
+.fc-popover .event {
+    margin-bottom: 10px;
+}
+.fc-popover .event:last-child {
+    margin-bottom: 0;
+}
+.event-team-logo {
+	height: 40px;
+	width: 40px;
+}
+.event:hover {
+	cursor: pointer;
+}
+.event img:first-child  {
+	margin-right: 5px;
+}
+.fav-footer {
+	margin-top: 1em;
+	border: 1px solid #ddd;
+}
+.fav-footer .col {
+	border-right: 1px solid #ddd;
+}
+.fav-footer .col:last-child {
+	border-right: 0;
+}
+.fav-logo img {
+	height: 125px;
+	width: 125px;
+	padding: 10px 0;
+    margin-left: 16px;
+}
+.modal-header {
+	padding: 5px 10px;
+}
+.modal-dialog {
+	max-width: 800px;
+}
+.modal-body {
+	background: url("../img/court.svg") center no-repeat;
+	background-size: cover;
+	height: 500px;
+}
+.place {
+	position: absolute;
+	left: 50%;
+	transform: translate(-50%);
+}
+.countdown {
+	position: absolute;
+	left: 50%;
+	top: 50px;
+	transform: translate(-50%);
+}
+.modal-stats {
+	position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+    top: 207px;
+    background: rgba(255,255,255,.7);
+    padding: 31px 23px;
+    border-radius: 47px;
+}
+.modal-team-logo {
+	position: absolute;
+	top: 181px;
+	background: #fff;
+	height: 107px;
+	width: 107px;
+}
+.home img {
+    left: 158px;
+}
+.away img {
+	right: 158px;
+}
+.odds {
+	position: absolute;
+	top: 222px;
+	min-width: 40px;
+	background: rgba(255,255,255,.7);
+    border-radius: 3px;
+    padding: 3px;
+    color: #505050;
+    text-align: center;
+}
+.home-odds {
+	left: 80px;
+}
+.away-odds {
+	right: 80px;
+}
+.roster {
+	position: absolute;
+	top: 290px;
+	background: rgba(255, 255, 255, .7);
+	border-radius: 5px;
+	padding: 10px 20px;
+	min-width: 180px;
+}
+.home-roster {
+	right: 15px;
+}
+.away-roster {
+	left: 15px;
+}
+.roster ul {
+	list-style: none;
+	padding: 0;
+	margin-bottom: 0;
+}
+.home-roster ul{
+	text-align: right;	
+}
+.seperator {
+	background: #000; 
+	width: 1px;
+	height: 24px;
+}
+.modal-footer {
+	display: block;
+}
+.footer-ava {
+	margin-top: 20px;
+}
+.footer-ava ul {
+	list-style: none;
+	padding: 0;
+	margin-bottom: 0
+}
+.bar td {
+	padding: 0 10px;
+}
+.bar tr td:first-child {
+	padding: 0;
+}
+.fav-footer {
+	visibility: hidden;
+}
+
+.stat-search {
+	margin-top: 5em;
+}
+.stat-cards {
+	min-height: calc(270px + 6rem)
+}
+.stat-card {
+	border-radius: .3rem;
+	border: 1px solid #ced4da;
+}
+.stat-card:first-child {
+	border-top-right-radius: 0;
+	border-bottom-right-radius: 0;
+	border-right: 5px solid #ced4da;
+}
+.stat-card:last-child {
+	border-top-left-radius: 0;
+	border-bottom-left-radius: 0;
+	border-left: 0;
+}
+.stat-conf:first-child {
+	border-right: 1px solid #ced4da;
+}
+.team {
+	height: 75px;
+	width: 75px;
+	background: red;
+	margin: 10px;
+	display: inline-block;
+}
+
+.row {
+	margin-left: 0;
+	margin-right: 0;
+}
+@media (min-width: 768px) and (max-width: 991px) {
+	.container {
+		max-width: unset;
+	}
+}
+// @media (min-width: 768px) {
+	
+// }
