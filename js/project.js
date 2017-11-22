@@ -184,7 +184,7 @@ $(document).ready(function() {
 		var teamID = triToID(tricode);
 		var rosterArray = [];
 		$.ajax ({
-			url: 'http://stats.nba.com/stats/commonTeamRoster/?teamID='+teamID+'&Season=2017-18&format=jsonp',
+			url: 'https://stats.nba.com/stats/commonTeamRoster/?teamID='+teamID+'&Season=2017-18&format=jsonp',
 			dataType:"jsonp",
 			success: function(response) {
 			// rosterFive = response.resultSets[0].rowSet.slice(0, 5);
@@ -239,7 +239,7 @@ $(document).ready(function() {
 		var rosterArray = [];
 
 		$.ajax ({
-			url: 'http://stats.nba.com/stats/commonTeamRoster/?teamID=' + teamID + '&Season=2017-18&format=jsonp',
+			url: 'https://stats.nba.com/stats/commonTeamRoster/?teamID=' + teamID + '&Season=2017-18&format=jsonp',
 			dataType:"jsonp",
 			success: function(response) {
 
@@ -282,7 +282,7 @@ $(document).ready(function() {
 		var playerArray = [];
 
 		$.ajax ({
-			url: 'http://stats.nba.com/stats/playerprofilev2/?playerid=' + playerID + '&permode=Totals&format=jsonp',
+			url: 'https://stats.nba.com/stats/playerprofilev2/?playerid=' + playerID + '&permode=Totals&format=jsonp',
 			dataType:"jsonp",
 			success: function(response) {
 				var stat = response.resultSets[0].rowSet[0]; 
@@ -309,7 +309,7 @@ $(document).ready(function() {
 		var teamID = triToID(tricode);
 		var teamStatArray = [];
 		$.ajax({
-			url: 'http://stats.nba.com/stats/teamdashboardbygeneralsplits?DateFrom=&DateTo=&GameSegment=&LastNGames=0&LeagueID=00&Location=&MeasureType=Base&Month=0&OpponentTeamID=0&Outcome=&PORound=0&PaceAdjust=N&PerMode=PerGame&Period=0&PlusMinus=N&Rank=N&Season=2017-18&SeasonSegment=&SeasonType=Regular+Season&ShotClockRange=&Split=general&VsConference=&VsDivision=&TeamID='+teamID,
+			url: 'https://stats.nba.com/stats/teamdashboardbygeneralsplits?DateFrom=&DateTo=&GameSegment=&LastNGames=0&LeagueID=00&Location=&MeasureType=Base&Month=0&OpponentTeamID=0&Outcome=&PORound=0&PaceAdjust=N&PerMode=PerGame&Period=0&PlusMinus=N&Rank=N&Season=2017-18&SeasonSegment=&SeasonType=Regular+Season&ShotClockRange=&Split=general&VsConference=&VsDivision=&TeamID='+teamID,
 			dataType:"jsonp",
 			success: function(response) {
 				var stat = response.resultSets[0].rowSet[0];
@@ -346,7 +346,7 @@ $(document).ready(function() {
 	statTeams = '<div class="d-flex p-4 justify-content-around flex-wrap align-items-center stat-teams"></div>'
 
 	statPlayerList = `<div class="w-100 stat-player-list">
-						<img src="http://via.placeholder.com/500x75" class="w-100 mb-3" alt="">
+						<img src="https://via.placeholder.com/500x75" class="w-100 mb-3" alt="">
 						<table class="table table-hover table-bordered mb-0">
 							<thead>
 								<tr>
@@ -365,7 +365,7 @@ $(document).ready(function() {
 
 	statPlayer = `<div class="stat-player w-100">
 					<div class="d-flex flex-column align-items-center mr-5 stat-player-info">
-						<img src="http://via.placeholder.com/150x150" alt="" class="rounded-circle">
+						<img src="https://via.placeholder.com/150x150" alt="" class="rounded-circle">
 						<span class="stat-player-name"></span>
 					</div>
 					<table class="table table-bordered w-100 float-right">
@@ -376,7 +376,7 @@ $(document).ready(function() {
 
 	statTeam = `<div class="stat-team w-100">
 					<div class="d-flex flex-column align-items-center mr-5 stat-team-info">
-						<img src="http://via.placeholder.com/150x150" alt="" class="rounded-circle">
+						<img src="https://via.placeholder.com/150x150" alt="" class="rounded-circle">
 						<span class="stat-team-name"></span>
 					</div>
 					<table class="table table-bordered w-100 float-right">
