@@ -317,8 +317,7 @@ $(document).ready(function() {
 
 	function highlight(statLeft, statRight) {
 		for (var i = 0; i < statLeft.length; i++) {
-			console.log("hello")
-			statLeft[i][0].innerHTML > statRight[i][0].innerHTML ? $(statLeft[i]).css('color', 'red') : $(statRight[i]).css('color', 'red')
+			parseInt(statLeft[i][0].innerHTML) > parseInt(statRight[i][0].innerHTML) ? $(statLeft[i]).css('color', 'red') : $(statRight[i]).css('color', 'red')
 		}
 	}
 
