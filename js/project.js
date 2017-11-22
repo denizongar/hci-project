@@ -202,24 +202,6 @@ $(document).ready(function() {
 	// ++++++++++++ STATS ++++++++++++
 	//
 
-	// function aa(conf) {
-	// 	if (conf == 'left') {
-	// 		var index = 0
-	// 		var size = 15
-	// 	}
-	// 	else {
-	// 		var index = 15
-	// 		var size = 30
-	// 	}
-	// 	var hello = [];
-	// 	for (var i = index; i < size; i++) {
-	// 		hello += '<img src="' 
-	// 		+ teamLogo((json.teams[i].tricode)) +'" alt="teamLogo" height="90px" width="90px" class="rounded-circle p-2 stat-team-list-logo" id="'
-	// 		+ json.teams[i].tricode
-	// 		+ '">'
-	// 	}
-	// 	return hello		
-	// }
 	function aa(side, conf) {
 		teamList = [];
 		$.each(json.teams, function(i, team) {
@@ -368,7 +350,7 @@ $(document).ready(function() {
 						<img src="https://via.placeholder.com/150x150" alt="" class="rounded-circle">
 						<span class="stat-player-name"></span>
 					</div>
-					<table class="table table-bordered w-100 float-right">
+					<table class="table table-bordered w-100 float-right mb-0">
 						<tbody>
 						</tbody>
 					</table>
@@ -379,7 +361,7 @@ $(document).ready(function() {
 						<img src="https://via.placeholder.com/150x150" alt="" class="rounded-circle">
 						<span class="stat-team-name"></span>
 					</div>
-					<table class="table table-bordered w-100 float-right">
+					<table class="table table-bordered w-100 float-right mb-0">
 						<tbody>
 						</tbody>
 					</table>
