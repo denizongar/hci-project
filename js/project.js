@@ -409,7 +409,7 @@ $(document).ready(function() {
 		
 		$('.pot').remove();
 		$('.stat-card').append(statConf)
-		$('.container').append(statButtons)
+		$('.stats-container').append(statButtons)
 
 		$('.stat-left > .stat-conf__w').click(function() {
 			$('.stat-left').html(statTeams)
@@ -457,7 +457,7 @@ $(document).ready(function() {
 
 		$('.pot').remove();
 		$('.stat-card').append(statConf)
-		$('.container').append(statButtons)
+		$('.stats-container').append(statButtons)
 
 		$('.stat-left > .stat-conf__w').click(function() {
 			$('.stat-left').html(statTeams)
