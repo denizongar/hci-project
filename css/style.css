@@ -1,3 +1,29 @@
+.vote-disabled {
+	color: gray;
+}
+.vote-disabled:hover{
+	color: gray;
+	cursor: default;
+}
+.navbarr {
+	margin: 20px 0;
+}
+.nav-circle {
+	width: 100px;
+	height: 100px;
+	line-height: 100px;
+	text-align: center;
+}
+.nav-circle:hover {
+	cursor: pointer;
+	background-color: #dedede;
+}
+.pot:hover, .stat-conf:hover, .stat-team-list-logo:hover, .stat-t-player:hover {
+	cursor: pointer;
+}
+.nav-circle:nth-child(2) {
+	margin: 0 20px;
+}
 .calendar-page {
 	margin-top: 20px;
 }
@@ -6,7 +32,7 @@
 }
 .fc-more-cell > div {
 	margin-top: 10px;
-	margin-left: 100px;
+	margin-left: 90px;
 }
 .fc-popover {
 	background-color: #fff;
@@ -45,10 +71,9 @@
 	border-right: 0;
 }
 .fav-logo img {
-	height: 125px;
-	width: 125px;
+	height: 100px;
+	width: 100px;
 	padding: 10px 0;
-    margin-left: 16px;
 }
 .modal-header {
 	padding: 5px 10px;
@@ -155,11 +180,7 @@
 	padding: 0;
 }
 .fav-footer {
-	visibility: hidden;
-}
-
-.stat-search {
-	margin-top: 5em;
+	display: none;
 }
 .stat-cards {
 	min-height: calc(270px + 6rem)
@@ -180,6 +201,10 @@
 }
 .stat-conf:first-child {
 	border-right: 1px solid #ced4da;
+}
+.stat-team-logo {
+	height: 150px;
+	width: 150px;
 }
 .team {
 	height: 75px;

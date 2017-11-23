@@ -15,22 +15,35 @@
 	<title>Calendar</title>
 </head>
 <body>
+	<div class="navbarr">
+		<div class="container d-flex justify-content-center">
+			<div class="border border-secondary rounded-circle nav-circle nav-news" data-href="news.html">
+				<span>News</span>
+			</div>
+			<div class="border border-secondary rounded-circle nav-circle nav-stats" data-href="stats.html">
+				<span>Stats</span>
+			</div>
+			<div class="border border-secondary rounded-circle nav-circle nav-calendar" data-href="index.html">
+				<span>Calendar</span>
+			</div>
+		</div>
+	</div>
 	<div class="container calendar-page">
 		<div class="row">
 			<div id='calendar'></div>
 		</div>
 		<div class="row fav-footer">
-			<div class="col col-2 fav-logo"></div>
+			<div class="col col-2 d-flex justify-content-center fav-logo"></div>
 			<div class="col fav-record">
-				<h4>Record</h4>
+				<h4 class="mt-2">Record</h4>
 				<span></span>
 			</div>
 			<div class="col fav-standing">
-				<h4>Standing in Conference</h4>
+				<h4 class="mt-2">Standing in Conference</h4>
 				<span></span>
 			</div>
 			<div class="col fav-nextOp">
-				<h4>Next Oppenant</h4>
+				<h4 class="mt-2">Next Oppenant</h4>
 				<span></span>
 			</div>
 		</div>

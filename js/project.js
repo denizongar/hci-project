@@ -1,4 +1,11 @@
 $(document).ready(function() {
+	$('.nav-circle').click(function() {
+		window.location.href = $(this).attr('data-href');
+	});
+	// $.each($('.nav-circle'), function(index, val) {
+	// 	window.location.href = $(this).attr('data-href');
+	// });
+
 	function teamLogo(tricode) {
 		return 'https://stats.nba.com/media/img/teams/logos/' + tricode + '_logo.svg'
 	}
@@ -22,7 +29,7 @@ $(document).ready(function() {
 
 	// fullCalendar
 	$('#calendar').fullCalendar({
-		height: 700,
+		height: 650,
 		eventBackgroundColor: 'rgba(0,0,0,0)',
 		eventBorderColor: 'rgba(0,0,0,0)',
 		views: {
@@ -97,10 +104,11 @@ $(document).ready(function() {
 			$('#event-modal').modal();
 			$('#event-modal').find('.place').html(event.place);
 			$('#event-modal').find('.countdown').countdown(event.startt, function(event) {
-				$(this).text(
-					event.strftime('%H:%M:%S')
-					);
-			});
+				$(this).text(event.strftime('%H:%M:%S'));
+				$(this).on('finish.countdown', function() {
+				    $(this).text("This game has ended");
+				});
+			})
 			var calendarStatLink = 'index.html?home' + event.teams[0] + '&away' + event.teams[1]
 			history.pushState(null, null, calendarStatLink);
 			
@@ -140,9 +148,13 @@ $(document).ready(function() {
 		favTeam = $('#fav-team :selected').text()
 		favTeamTri = $('#fav-team :selected').val()
 		if (favTeam == "Favorite Team") {
-			$('.fav-footer').css('visibility', 'hidden');
+			$('.fav-footer').css('display', 'none');
+			$('#calendar').fullCalendar('option', 'height', 650);
 		}
-		else $('.fav-footer').css('visibility', 'visible');
+		else {
+			$('.fav-footer').css('display', 'flex')
+			$('#calendar').fullCalendar('option', 'height', 530);
+		}
 		$('.fav-logo').html('<img class="rounded-circle" src="'+teamLogo(favTeamTri)+'" alt=""/>')
 		$('.fav-record > span').html(Math.floor(Math.random()*10) + '-' + Math.floor(Math.random()*10))
 		$('.fav-standing > span').html(Math.floor(Math.random()*10 + 1))
@@ -345,9 +357,9 @@ $(document).ready(function() {
 					</div>`
 
 	statPlayer = `<div class="stat-player w-100">
-					<div class="d-flex flex-column align-items-center mr-5 stat-player-info">
+					<div class="d-flex flex-column align-items-center mr-5 my-3 stat-player-info">
 						<img src="https://via.placeholder.com/150x150" alt="" class="rounded-circle">
-						<span class="stat-player-name"></span>
+						<span class="stat-player-name mt-3"></span>
 					</div>
 					<table class="table table-bordered w-100 float-right mb-0">
 						<tbody>
@@ -356,8 +368,8 @@ $(document).ready(function() {
 				</div>`
 
 	statTeam = `<div class="stat-team w-100">
-					<div class="d-flex flex-column align-items-center mr-5 stat-team-info">
-						<img src="https://via.placeholder.com/150x150" alt="" class="rounded-circle">
+					<div class="d-flex flex-column align-items-center mr-5 my-3 stat-team-info">
+						<img src="https://via.placeholder.com/150x150" alt="" class="rounded-circle stat-team-logo">
 						<span class="stat-team-name"></span>
 					</div>
 					<table class="table table-bordered w-100 float-right mb-0">
@@ -432,6 +444,7 @@ $(document).ready(function() {
 					$('.stat-left').html(statTeam)
 					var teamName = triToName($(this).attr('id'))
 					$('.stat-left .stat-team-name').html(teamName);
+					$('.stat-left img').attr('src', teamLogo($(this).attr('id')));
 				}
 				else {
 					$('.stat-right').html(statTeam)
@@ -489,17 +502,185 @@ $(document).ready(function() {
 
 	if (typeof home != 'undefined') {
 		var calendarLink = 'index.html?home=' + home + '&away=' + away
-
-		// $('.container').prepend('<a href="'+calendarLink+'" class="btn btn-secondary ">Back to calendar</a>')
 		$('.pot').remove();
 		$('.stat-card').append(statTeam)
 		var homeName = triToName(home)
 		var awayName = triToName(away)
 		$('.stat-left .stat-team-name').html(homeName);
 		$('.stat-right .stat-team-name').html(awayName);
+		$('.stat-left img').attr('src', teamLogo(home));
+		$('.stat-right img').attr('src', teamLogo(away));
 		dd(home, 'left')
 		dd(away, 'right')
 	}
+
+	//
+	// ++++++++++++ NEWS ++++++++++++
+	//
+
+	var newsCard = `<div class="card news-card w-75 mb-3" id="" data-view="" data-vote="" data-time="" data-src="" ">
+					<img src="https://via.placeholder.com/600x250" alt="" class="card-img-top">
+					<div class="card-body">
+						<h4 class="card-title">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus molestiae</h4>
+						<p class="card-text d-inline card-time"><small class="text-muted">5 hours ago</small></p>
+						<p class="card-text d-inline card-team-name float-right"><small class="text-muted text-capitalize">Celtics</small></p>
+					</div>
+					<div class="d-flex bg-light justify-content-between align-items-center py-1 px-3 card-actions">
+						<div class="card-vote">
+							<a class="vote-up" href="#"><span class="oi oi-arrow-thick-top"></span></a>
+							<span class="mx-2 vote-count">250</span>
+							<a class="vote-down" href="#"><span class="oi oi-arrow-thick-bottom"></span></a>
+						</div>
+						<a href="#" class="card-text card-source"><small>nbanews.com</small></a>
+					</div>
+				</div>`
+
+	var youtubeCard;
+
+	var newsTeams = ['celtics', 'raptors', 'lakers', 'hawks']
+	var newsSidebar = `<a class="btn btn-secondary btn-block btn-sm mt-2 source-button" data-toggle="collapse" href="" aria-expanded="false" aria-controls=""></a>
+						<div class="collapse" id="">
+							<div class="card">
+								<div class="list-group list-group-flush"></div>
+							</div>
+						</div>`
+	var sidebarDropdownList = `<a href="#" class="list-group-item list-group-item-action" data-filter=""></a>`
+
+	// newsSources = {
+	// 	stats: {},
+	// 	trade: {realgm: 'RealGM', sbnation: 'SBNation', si: 'Sports Illustrated', hoopshype: 'HoopsHype'}, 
+	// 	injury: {rotoworld: 'Rotoworld', cbssports: 'CBS Sports', vegasinsider: 'Vegas Insider'},
+	// 	gossip: {tmz: 'TMZ', yardbarker: 'Yardbarker', mirror: 'Mirror', theringer: 'The Ringer'},
+	// 	author: {billsimmons: 'Bill Simmons', dannychau: 'Danny Chau', johngonzalez: 'John Gonzalez', adrianarowski: 'Adrianarowski'},
+	// 	youtube: {},
+	// 	highlights: {}
+	// }
+	trade = ['realgm', 'sbnation', 'si', 'hoopshype']
+	injury = ['rotoworld', 'cbssports', 'vegasinsider']
+	gossip = ['tmz', 'yardbarker', 'mirror', 'theringer']
+	author = ['billsimmons', 'dannychau', 'johngonzalez', 'adrianarowski']
+
+	for (var i = 0; i < 50; i++) {
+		$('.news-cards').append(newsCard)
+	}
+
+	$.each($('.news-card'), function(i, val) {
+		if (i < 10) {
+			$(this).addClass('card-stats')
+			i++
+		}
+		else if (i >= 10 && i < 20) {
+			$(this).addClass('card-trade')
+			i++
+		}
+		else if (i >= 20 && i < 30) {
+			$(this).addClass('card-injury')
+			i++
+		}
+		else if (i >= 30 && i < 40) {
+			$(this).addClass('card-gossip')
+			i++
+		}
+		else if (i >= 40 && i < 50) {
+			$(this).addClass('card-author')
+			i++
+		}
+	});
+	
+	$.each($('.card-trade'), function() {
+		var source = trade[Math.floor(Math.random()*trade.length)]
+		$(this).addClass(source)
+		$(this).find('small').html(source + '.com')
+	});
+	$.each($('.card-injury'), function() {
+		var source = injury[Math.floor(Math.random()*injury.length)]
+		$(this).addClass(source)
+		$(this).find('small').html(source + '.com')
+	});
+	$.each($('.card-gossip'), function() {
+		var source = gossip[Math.floor(Math.random()*gossip.length)]
+		$(this).addClass(source)
+		$(this).find('small').html(source + '.com')
+	});
+	$.each($('.card-author'), function() {
+		$(this).addClass(author[Math.floor(Math.random()*author.length)])
+	});
+
+	$('.vote-up').click(function() {
+		event.preventDefault();
+		if ($(this).hasClass('vote-disabled')) return;
+		$(this).next().html(function(i, val) {return +val+1})
+		$(this).addClass('vote-disabled')
+		$('.vote-down').removeClass('vote-disabled')
+	});
+	$('.vote-down').click(function() {
+		event.preventDefault();
+		if ($(this).hasClass('vote-disabled')) return;
+		$(this).prev().html(function(i, val) {return +val-1})
+		$(this).addClass('vote-disabled')
+		$('.vote-up').removeClass('vote-disabled')
+	});
+
+	$.each($('.news-card'), function() {
+		var team = newsTeams[Math.floor(Math.random()*newsTeams.length)]
+		$(this).addClass('card-team')
+		$(this).find('.card-team-name > small').html(team)
+		$(this).addClass(team)
+	});
+
+	$.each($('.news-card'), function() {
+		var vote = Math.floor(Math.random()*1000)
+		var time = Math.floor(Math.random()*23) + 1
+		var timeAgo;
+		time == 1 ? timeAgo = time + ' hour ago' : timeAgo = time + ' hours ago'
+		$(this).attr('data-vote', vote)
+		$(this).attr('data-time', time)
+		$(this).find('.vote-count').html(vote)
+		$(this).find('.card-time > small').html(timeAgo)
+	});
+	
+	$grid = $('.news-cards').isotope({
+	  itemSelector: '.news-card',
+	  layoutMode: 'vertical',
+	  getSortData: {
+	  	vote: '[data-vote] parseInt',
+	  	time: '[data-time] parseInt'
+	  },
+	  sortAscending: {
+	      vote: false
+	  }
+	});
+
+	$('.list-group').on('click', '.topic-select', function() {
+		event.preventDefault();
+		var filterVal = $(this).attr('data-filter')
+		$grid.isotope({
+			filter: filterVal
+		});
+	});
+
+	$('#card-sort').on('click', 'a', function() {
+		event.preventDefault();
+		var sortValue = $(this).attr('data-sort-value');
+  		$grid.isotope({
+  			sortBy: sortValue
+  		});
+	});
+
+	$('.news-sidebar').each( function(i, buttonGroup) {
+		var $buttonGroup = $(buttonGroup);
+		$buttonGroup.on( 'click', '.topic-select', function() {
+			$buttonGroup.find('.bg-info').removeClass('text-white bg-info');
+			$( this ).addClass('text-white bg-info');
+		});
+	});
+	$('#card-sort').each( function(i, buttonGroup) {
+		var $buttonGroup = $(buttonGroup);
+		$buttonGroup.on( 'click', '.dropdown-item', function() {
+			$buttonGroup.find('.bg-info').removeClass('text-white bg-info');
+			$( this ).addClass('text-white bg-info');
+		});
+	});
 });
 
 json = {
