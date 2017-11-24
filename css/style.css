@@ -1,3 +1,24 @@
+.source-logo {
+	margin-right: 20px;
+	background-color: #81cbac;
+	color: #fff;
+	padding: 3px 10px;
+}
+.conf-logo {
+	height: 125px;
+}
+.fc .fc-toolbar > * > * {
+    float: left !important;
+}
+.bg-light-blue {
+	background-color: #d5eaff;
+}
+.fc-next-button {
+	margin-left: 1.5rem !important;
+}
+.fc-prev-button, .fc-next-button {
+	margin-top: 4px !important;
+}
 .vote-disabled {
 	color: gray;
 }
@@ -14,14 +35,24 @@
 	line-height: 100px;
 	text-align: center;
 }
+.hub-logo {
+	width: 100px;
+	height: 100px;
+	line-height: 100px;
+	text-align: center;
+}
 .nav-circle:hover {
 	cursor: pointer;
 	background-color: #dedede;
 }
+.nav-community:hover {
+	cursor: not-allowed;
+	background-color: #fff;
+}
 .pot:hover, .stat-conf:hover, .stat-team-list-logo:hover, .stat-t-player:hover {
 	cursor: pointer;
 }
-.nav-circle:nth-child(2) {
+.nav-circle:not(:first-child):not(:last-child) {
 	margin: 0 20px;
 }
 .calendar-page {

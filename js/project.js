@@ -2,9 +2,17 @@ $(document).ready(function() {
 	$('.nav-circle').click(function() {
 		window.location.href = $(this).attr('data-href');
 	});
-	// $.each($('.nav-circle'), function(index, val) {
-	// 	window.location.href = $(this).attr('data-href');
-	// });
+	var currURL = $(location).attr('href');
+
+	if (~currURL.indexOf("index.html")) {
+		$('.nav-calendar').addClass('bg-light-blue')
+	}
+	else if (~currURL.indexOf("stats.html")) {
+		$('.nav-stats').addClass('bg-light-blue')
+	}
+	else if (~currURL.indexOf("news.html")) {
+		$('.nav-news').addClass('bg-light-blue')
+	}
 
 	function teamLogo(tricode) {
 		return 'https://stats.nba.com/media/img/teams/logos/' + tricode + '_logo.svg'
@@ -32,6 +40,7 @@ $(document).ready(function() {
 		height: 650,
 		eventBackgroundColor: 'rgba(0,0,0,0)',
 		eventBorderColor: 'rgba(0,0,0,0)',
+		bootstrapGlyphicons: false,
 		views: {
 			month: {
 				eventLimit: 2
@@ -56,7 +65,7 @@ $(document).ready(function() {
 		header: {
 			left:   'month basicWeek',
 			center: '',
-			right:  'title'
+			right:  'prev title next'
 		},
 		events: [
 		{	
@@ -332,9 +341,9 @@ $(document).ready(function() {
 			parseInt(statLeft[i][0].innerHTML) > parseInt(statRight[i][0].innerHTML) ? $(statLeft[i]).css('color', 'red') : $(statRight[i]).css('color', 'red')
 		}
 	}
-
-	statConf = `<div class="d-flex w-50 justify-content-center align-items-center stat-conf stat-conf__w">West</div>
-				<div class="d-flex w-50 justify-content-center align-items-center stat-conf stat-conf__e">East</div>`
+	
+	statConf = `<div class="d-flex w-50 justify-content-center align-items-center stat-conf stat-conf__w"><img class="conf-logo" src="./img/west.gif" alt="WesternLogo"/></div>
+				<div class="d-flex w-50 justify-content-center align-items-center stat-conf stat-conf__e"><img class="conf-logo" src="./img/east.gif" alt="EasternLogo"/></div>`
 
 	statTeams = '<div class="d-flex p-4 justify-content-around flex-wrap align-items-center stat-teams"></div>'
 
@@ -531,7 +540,7 @@ $(document).ready(function() {
 							<span class="mx-2 vote-count">250</span>
 							<a class="vote-down" href="#"><span class="oi oi-arrow-thick-bottom"></span></a>
 						</div>
-						<a href="#" class="card-text card-source"><small>nbanews.com</small></a>
+						<p class="card-text card-source"><small>nbanews.com</small></p>
 					</div>
 				</div>`
 
@@ -544,7 +553,6 @@ $(document).ready(function() {
 								<div class="list-group list-group-flush"></div>
 							</div>
 						</div>`
-	var sidebarDropdownList = `<a href="#" class="list-group-item list-group-item-action" data-filter=""></a>`
 
 	// newsSources = {
 	// 	stats: {},
@@ -658,6 +666,13 @@ $(document).ready(function() {
 			filter: filterVal
 		});
 	});
+	$('.news-sidebar').on('click', '.btn', function() {
+		var filterVal = '.' + $(this).attr('data-filter')
+		console.log(filterVal)
+		$grid.isotope({
+			filter: filterVal
+		});
+	});
 
 	$('#card-sort').on('click', 'a', function() {
 		event.preventDefault();
@@ -666,19 +681,34 @@ $(document).ready(function() {
   			sortBy: sortValue
   		});
 	});
+	
+	$('.news-sidebar').on('click','a.btn', function() {
+		$('.news-sidebar').find('.collapse.show').collapse('hide');
+	});
 
 	$('.news-sidebar').each( function(i, buttonGroup) {
 		var $buttonGroup = $(buttonGroup);
 		$buttonGroup.on( 'click', '.topic-select', function() {
 			$buttonGroup.find('.bg-info').removeClass('text-white bg-info');
-			$( this ).addClass('text-white bg-info');
+			$(this).addClass('text-white bg-info');
 		});
 	});
+	$('.news-sidebar').each(function(i, buttonGroup) {
+		var $buttonGroup = $(buttonGroup);
+		$buttonGroup.on('click', '.btn', function() {
+			$buttonGroup.find('.btn').removeClass('bg-success');
+			$(this).addClass('bg-success')
+
+		});
+	});
+
 	$('#card-sort').each( function(i, buttonGroup) {
 		var $buttonGroup = $(buttonGroup);
 		$buttonGroup.on( 'click', '.dropdown-item', function() {
 			$buttonGroup.find('.bg-info').removeClass('text-white bg-info');
-			$( this ).addClass('text-white bg-info');
+			$(this).addClass('text-white bg-info');
+			var sortValue = 'Sorted by ' + $(this).text()
+			$('.news-content-actions').find('.dropdown-toggle').html(sortValue)
 		});
 	});
 });
