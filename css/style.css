@@ -55,6 +55,10 @@
 .news-content {
 	margin-top: 44px;
 }
+.news-image {
+	height: 250px;
+
+}
 .news-content-actions .dropdown-item:active {
 	background-color: #785da2;
 }

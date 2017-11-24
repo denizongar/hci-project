@@ -387,7 +387,8 @@ $(document).ready(function() {
 	function dd(tricode, side) {
 		var name = '<h3 class="team-banner-name ml-2">'+triToName(tricode)+'</h3>'
 		var logo = '<img class="team-banner-logo ml-2" src="'+teamLogo(tricode)+'" alt=""/>'
-		var bannerInner =  logo + name
+		var advanced = '<button type="button" disabled class="btn btn-primary btn-sm ml-auto mr-3">Advanced Stats</button>'
+		var bannerInner =  logo + name + advanced
 		var styleRight = '<style>.stat-right .team-banner::after {background: url('+teamLogo(tricode)+') center center/100% no-repeat;}</style>'
 		var styleLeft = '<style>.stat-left .team-banner::after {background: url('+teamLogo(tricode)+') center center/100% no-repeat;}</style>'
 
@@ -468,6 +469,7 @@ $(document).ready(function() {
 	statPlayer = `<div class="stat-player w-100">
 					<div class="d-flex align-items-center stat-player-info">
 						<h2 class="stat-player-name ml-3 mt-3"></h2>
+						<button type="button" disabled class="btn btn-primary btn-sm ml-auto mr-3 mt-3">Advanced Stats</button>
 					</div>
 					<table class="table table-bordered w-100 float-right mb-0">
 						<tbody>
@@ -527,6 +529,7 @@ $(document).ready(function() {
 			}
 		}
 		
+		$('.stats-container > h4').html('Compare players')
 		$('.breadcrumb').append('<li class="breadcrumb-item active" aria-current="page">Conference</li>')
 		$('.pot').remove();
 		$('.stat-card').append(statConf)
@@ -583,7 +586,8 @@ $(document).ready(function() {
 				});
 			}
 		}
-
+		
+		$('.stats-container > h4').html('Compare players')
 		$('.breadcrumb').append('<li class="breadcrumb-item active" aria-current="page">Conference</li>')
 		$('.pot').remove();
 		$('.stat-card').append(statConf)
@@ -653,7 +657,7 @@ $(document).ready(function() {
 	//
 
 	var newsCard = `<div class="card news-card w-75 mb-3" id="" data-view="0" data-vote="" data-time="" data-src="" ">
-					<img src="https://via.placeholder.com/600x250" alt="" class="card-img-top">
+					<img src="https://via.placeholder.com/600x250" alt="" class="card-img-top news-image">
 					<div class="card-body">
 						<h4 class="card-title">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus molestiae</h4>
 						<p class="card-text d-inline card-time"><small class="text-muted">5 hours ago</small></p>
@@ -712,6 +716,13 @@ $(document).ready(function() {
 	var gossip = ['tmz', 'yardbarker', 'mirror', 'theringer']
 	var author = ['billsimmons', 'dannychau', 'johngonzalez', 'adrianarowski']
 	var channel = ['nba', 'espn', 'xima', 'deo']
+	var newsTexts = [
+		'NBA players stuck on the sidelines with new format for World Cup qualifiers',
+		'Evan Fournier: "Play Like It\'s a Playoff Game For Us"',
+		'East’s early rise NBA surprise',
+		'NBA: Heat snap Celtics\' unbeaten run, 4 other NBA win streaks whose end came as a surprise',
+		'How Under Armour learned from mistakes to make the Curry 4'
+	]
 
 
 	for (var i = 0; i < 50; i++) {
@@ -720,6 +731,14 @@ $(document).ready(function() {
 	for (var i = 0; i < 10; i++) {
 		$('.news-cards').append(youtubeCard)
 	}
+
+	$.each($('.news-card'), function(i, val) {
+		imgSrc = './img/'+parseInt(i+1)+'.jpg'
+		if (i < 5) {
+			$(this).find('.news-image').attr('src', imgSrc)
+			$(this).find('h4').html(newsTexts[i])
+		}
+	})
 
 	$.each($('.news-card'), function(i, val) {
 		if (i < 10) {
