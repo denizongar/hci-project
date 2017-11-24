@@ -4,6 +4,7 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.6.2/fullcalendar.min.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.6.2/fullcalendar.print.css" media="print">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="./css/font-awesome.min.css"/>
 	<link rel="stylesheet" href="./css/style.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
@@ -84,39 +85,43 @@
 						</div>
 					</div>
 					<div class="modal-body">
-						<span class="place"></span>
 						<span class="countdown"></span>
-						<a href="" class="modal-stats">STATS</a>
+						<a href="" class="modal-stats"><i class="fa fa-bar-chart" aria-hidden="true"></i> STATS</a>
 						<div class="row">
 							<div class="col home">
 								<img class="rounded-circle modal-team-logo" src="https://via.placeholder.com/107x107" alt="">
-								<span class="odds home-odds"></span>
+								<span class="odds home-odds" data-toggle="tooltip" data-placement="top" title="Vegas odds"></span>
 								<div class="roster home-roster"><ul></ul></div>
 							</div>
 							<div class="col away">
 								<img class="rounded-circle modal-team-logo" src="https://via.placeholder.com/107x107" alt="">
-								<span class="odds away-odds"></span>
+								<span class="odds away-odds" data-toggle="tooltip" data-placement="top" title="Vegas odds"></span>
 								<div class="roster away-roster"><ul></ul></div>
 							</div>
 						</div>
+						<span class="place"></span>
 					</div>
 					<div class="modal-footer">
 						<div class="text-center">
-							<button type="button" class="btn btn-secondary">Streaming</button>
-							<button type="button" class="btn btn-secondary">Buy Tickets</button>
+							<button type="button" class="btn btn-secondary"><i class="fa fa-laptop" aria-hidden="true"></i> Streaming</button>
+							<button type="button" class="btn btn-secondary"><i class="fa fa-ticket" aria-hidden="true"></i> Buy Tickets</button>
 						</div>
 						<div class="row footer-ava">
 							<div class="col cable">
 								<h4>Cable Available</h4>
 								<ul>
-									<li><img src="https://via.placeholder.com/40x40" alt="">10:00PM</li>
-									<li><img src="https://via.placeholder.com/40x40" alt="">10:00PM</li>
-									<li><img src="https://via.placeholder.com/40x40" alt="">10:00PM</li>
+									<li><i class="fa fa-television" aria-hidden="true"></i> ESPN -  10:00 PM</li>
+									<li><i class="fa fa-television" aria-hidden="true"></i> TSN - 10:00 PM</li>
+									<li><i class="fa fa-television" aria-hidden="true"></i> Fox Sports - 10:00 PM</li>
 								</ul>
 							</div>
 							<div class="col bar">
 								<h4>Bar Available</h4>
-								<table></table>
+								<ul>
+									<li><i class="fa fa-glass" aria-hidden="true"></i>Barney's<span class="badge badge-info">7km</span><a href="#">Map</a></li>
+									<li><i class="fa fa-glass" aria-hidden="true"></i>Pub One<span class="badge badge-warning">12km</span><a href="#">Map</a></li>
+									<li><i class="fa fa-glass" aria-hidden="true"></i>Leo's<span class="badge badge-danger">18km</span><a href="#">Map</a></li>
+								</ul>
 							</div>
 						</div>
 					</div>

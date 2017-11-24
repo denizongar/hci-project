@@ -4,6 +4,32 @@
 .primary-color {
 	color: #785da2 !important;
 }
+.loading {
+	margin: 20px 0 0 20px;
+}
+.loading i {
+	font-size: 14px;
+}
+.team-banner::after {
+	content: '';
+	opacity: 0.2;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    z-index: 0;
+}
+.team-banner {
+	height: 80px;
+	position: relative;
+}
+.team-banner-logo {
+	height: 70px
+}
+.team-banner-name {
+	display: inline;
+}
 .source-logo {
 	margin-right: 20px;
 	background-color: #785da2;
@@ -12,6 +38,9 @@
 }
 .conf-logo {
 	height: 125px;
+}
+.news-content {
+	margin-top: 44px;
 }
 .news-content-actions .dropdown-item:active {
 	background-color: #785da2;
@@ -28,8 +57,15 @@
 .fc-prev-button, .fc-next-button {
 	margin-top: 4px !important;
 }
+.fc-sat, .fc-sun {
+    background: #f5f1ff;
+}
+.fc-popover .fc-day-grid-event:first-child {
+	display: none;
+}
 .vote-up, .vote-down {
 	color: gray;
+	font-size: 13px;
 }
 .voted {
 	color: #785da2;
@@ -125,6 +161,7 @@
 .fav-footer {
 	margin-top: 1em;
 	border: 1px solid #ddd;
+	background-color: #f5f1ff
 }
 .fav-footer .col {
 	border-right: 1px solid #ddd;
@@ -152,22 +189,43 @@
 	position: absolute;
 	left: 50%;
 	transform: translate(-50%);
+	color: #fff;
+    font-weight: 600;
+    bottom: 12px;
+}
+.place::before {
+	content: "\f041";
+	font: normal normal normal 14px/1 FontAwesome;
+	margin-right: 5px;
 }
 .countdown {
 	position: absolute;
 	left: 50%;
-	top: 50px;
+	top: 10px;
 	transform: translate(-50%);
+	color: #fff;
+    font-weight: 600;
+}
+.countdown::before {
+	content: "\f017";
+	font: normal normal normal 14px/1 FontAwesome;
+	margin-right: 5px;
 }
 .modal-stats {
 	position: absolute;
 	left: 50%;
 	transform: translate(-50%);
-	top: 207px;
-	background: rgba(255,255,255,.7);
-	padding: 31px 23px;
-	border-radius: 47px;
+	top: 202px;
+	background: rgba(255,255,255,.8);
+	padding: 34px 9px;
+	border-radius: 50px;
+	font-size: 18px;
+	font-weight: 500;
 }
+.modal-stats:hover {
+	text-decoration: none;
+}
+
 .modal-team-logo {
 	position: absolute;
 	top: 181px;
@@ -190,6 +248,9 @@
 	padding: 3px;
 	color: #505050;
 	text-align: center;
+}
+.odds:hover {
+	cursor: default;
 }
 .home-odds {
 	left: 80px;
@@ -235,11 +296,11 @@
 	padding: 0;
 	margin-bottom: 0
 }
-.bar td {
-	padding: 0 10px;
+.bar li *, bar span  {
+	margin: 0 10px;
 }
-.bar tr td:first-child {
-	padding: 0;
+.bar li a {
+	margin-left: 0;
 }
 .fav-footer {
 	display: none;
