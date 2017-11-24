@@ -5,13 +5,13 @@ $(document).ready(function() {
 	var currURL = $(location).attr('href');
 
 	if (~currURL.indexOf("index.html")) {
-		$('.nav-calendar').addClass('bg-light-blue')
+		$('.nav-calendar').addClass('bg-light-purple')
 	}
 	else if (~currURL.indexOf("stats.html")) {
-		$('.nav-stats').addClass('bg-light-blue')
+		$('.nav-stats').addClass('bg-light-purple')
 	}
 	else if (~currURL.indexOf("news.html")) {
-		$('.nav-news').addClass('bg-light-blue')
+		$('.nav-news').addClass('bg-light-purple')
 	}
 
 	function teamLogo(tricode) {
@@ -269,7 +269,7 @@ $(document).ready(function() {
 		return function(header, data){
 		var headerColumn = '<th class="text-'+s+'" scope="row">'+header+'</th>'
 		var dataColumn = '<td class="stat-cell text-'+ textA +'">'+ data +'</td>'
-		var result = '<tr>'
+		var result = '<tr class="playerFound">'
 		if(s == 'left') {
 			result = result + headerColumn+dataColumn
 		} else{
@@ -283,7 +283,8 @@ $(document).ready(function() {
 
 	function cc(playerID, side) {
 		var playerArray = [];
-
+		var loading = '<span class="loading position-absolute">Loading...</span>'
+		side == 'left' ? $('.stat-left').append(loading) : $('.stat-right').append(loading)
 		$.ajax ({
 			url: 'https://stats.nba.com/stats/playerprofilev2/?playerid=' + playerID + '&permode=Totals&format=jsonp',
 			dataType:"jsonp",
@@ -303,8 +304,13 @@ $(document).ready(function() {
 					rowFunction('BLK', stat[23])+
 					rowFunction('STL', stat[22])+
 					rowFunction('TOV', stat[24])
-				
+
+				side == 'left' ? $('.stat-left').find('.loading').remove() : $('.stat-right').find('.loading').remove()
 				side == 'left' ? $('.stat-left tbody').append(playerArray) : $('.stat-right tbody').append(playerArray)
+
+				if ($('.stat-left').find('.playerFound').length > 0 && $('.stat-right').find('.playerFound').length > 0) {
+					$('.stats-container > h4').after('<a class="btn btn-primary ml-3 mb-2 btn-sm" href="stats.html" role="button">Reset</a>')
+				}
 			}
 		})
 	}
@@ -338,7 +344,7 @@ $(document).ready(function() {
 
 	function highlight(statLeft, statRight) {
 		for (var i = 0; i < statLeft.length; i++) {
-			parseInt(statLeft[i][0].innerHTML) > parseInt(statRight[i][0].innerHTML) ? $(statLeft[i]).css('color', 'red') : $(statRight[i]).css('color', 'red')
+			parseInt(statLeft[i][0].innerHTML) > parseInt(statRight[i][0].innerHTML) ? $(statLeft[i]).css('background-color', '#e3dcee') : $(statRight[i]).css('background-color', '#e3dcee')
 		}
 	}
 	
@@ -388,8 +394,8 @@ $(document).ready(function() {
 				</div>`
 
 	statButtons = `<div class="d-flex justify-content-around stat-buttons">
-						<button class="btn btn-block mt-3 mx-2">Position</button>
-						<button class="btn btn-block mt-3 mx-2">Position</button>
+						<button class="btn btn-block mt-3 mx-2" disabled>Position</button>
+						<button class="btn btn-block mt-3 mx-2" disabled>Position</button>
 					</div>`
 	
 	$('.pot-player').click(function() {
@@ -616,18 +622,34 @@ $(document).ready(function() {
 
 	$('.vote-up').click(function() {
 		event.preventDefault();
-		if ($(this).hasClass('vote-disabled')) return;
-		$(this).next().html(function(i, val) {return +val+1})
-		$(this).addClass('vote-disabled')
-		$('.vote-down').removeClass('vote-disabled')
-	});
+		if ($('.vote-down').hasClass('voted')) {
+			$('.vote-down').removeClass('voted')
+			$(this).next().html(function(i, val) {return +val+1})
+		}
+		if ($(this).hasClass('voted')) {
+			$(this).removeClass('voted')
+			$(this).next().html(function(i, val) {return +val-1})
+		}
+		else {
+			$(this).next().html(function(i, val) {return +val+1})
+			$(this).addClass('voted')
+		}
+	})
 	$('.vote-down').click(function() {
 		event.preventDefault();
-		if ($(this).hasClass('vote-disabled')) return;
-		$(this).prev().html(function(i, val) {return +val-1})
-		$(this).addClass('vote-disabled')
-		$('.vote-up').removeClass('vote-disabled')
-	});
+		if ($('.vote-up').hasClass('voted')) {
+			$('.vote-up').removeClass('voted')
+			$(this).prev().html(function(i, val) {return +val-1})
+		}
+		if ($(this).hasClass('voted')) {
+			$(this).removeClass('voted')
+			$(this).prev().html(function(i, val) {return +val+1})
+		}
+		else {
+			$(this).prev().html(function(i, val) {return +val-1})
+			$(this).addClass('voted')
+		}
+	})
 
 	$.each($('.news-card'), function() {
 		var team = newsTeams[Math.floor(Math.random()*newsTeams.length)]
@@ -689,15 +711,15 @@ $(document).ready(function() {
 	$('.news-sidebar').each( function(i, buttonGroup) {
 		var $buttonGroup = $(buttonGroup);
 		$buttonGroup.on( 'click', '.topic-select', function() {
-			$buttonGroup.find('.bg-info').removeClass('text-white bg-info');
-			$(this).addClass('text-white bg-info');
+			$buttonGroup.find('.primary-color-bg').removeClass('text-white primary-color-bg');
+			$(this).addClass('text-white primary-color-bg');
 		});
 	});
 	$('.news-sidebar').each(function(i, buttonGroup) {
 		var $buttonGroup = $(buttonGroup);
 		$buttonGroup.on('click', '.btn', function() {
-			$buttonGroup.find('.btn').removeClass('bg-success');
-			$(this).addClass('bg-success')
+			$buttonGroup.find('.btn').removeClass('primary-color-bg');
+			$(this).addClass('primary-color-bg')
 
 		});
 	});
@@ -705,8 +727,8 @@ $(document).ready(function() {
 	$('#card-sort').each( function(i, buttonGroup) {
 		var $buttonGroup = $(buttonGroup);
 		$buttonGroup.on( 'click', '.dropdown-item', function() {
-			$buttonGroup.find('.bg-info').removeClass('text-white bg-info');
-			$(this).addClass('text-white bg-info');
+			$buttonGroup.find('.primary-color-bg').removeClass('text-white primary-color-bg');
+			$(this).addClass('text-white primary-color-bg');
 			var sortValue = 'Sorted by ' + $(this).text()
 			$('.news-content-actions').find('.dropdown-toggle').html(sortValue)
 		});

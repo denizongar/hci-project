@@ -1,17 +1,26 @@
+.primary-color-bg {
+	background-color: #785da2 !important;
+}
+.primary-color {
+	color: #785da2 !important;
+}
 .source-logo {
 	margin-right: 20px;
-	background-color: #81cbac;
+	background-color: #785da2;
 	color: #fff;
 	padding: 3px 10px;
 }
 .conf-logo {
 	height: 125px;
 }
+.news-content-actions .dropdown-item:active {
+	background-color: #785da2;
+}
 .fc .fc-toolbar > * > * {
     float: left !important;
 }
-.bg-light-blue {
-	background-color: #d5eaff;
+.bg-light-purple {
+	background-color: #bbacd1;
 }
 .fc-next-button {
 	margin-left: 1.5rem !important;
@@ -19,12 +28,14 @@
 .fc-prev-button, .fc-next-button {
 	margin-top: 4px !important;
 }
-.vote-disabled {
+.vote-up, .vote-down {
 	color: gray;
 }
-.vote-disabled:hover{
-	color: gray;
-	cursor: default;
+.voted {
+	color: #785da2;
+}
+.vote-up:hover, .vote-down:hover{
+	color: #785da2;
 }
 .navbarr {
 	margin: 20px 0;
@@ -41,9 +52,12 @@
 	line-height: 100px;
 	text-align: center;
 }
+.hub-logo:hover {
+	cursor: default;
+}
 .nav-circle:hover {
 	cursor: pointer;
-	background-color: #dedede;
+	background-color: #e3dcee;
 }
 .nav-community:hover {
 	cursor: not-allowed;
