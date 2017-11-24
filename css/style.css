@@ -18,7 +18,20 @@
     bottom: 0;
     right: 0;
     position: absolute;
-    z-index: 0;
+    z-index: -2;
+}
+.stat-player-info::after {
+	content: '';
+	opacity: 0.2;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    z-index: -2;
+}
+.stat-player-info {
+	position: relative;
 }
 .team-banner {
 	height: 80px;
@@ -58,10 +71,10 @@
 	margin-top: 4px !important;
 }
 .fc-sat, .fc-sun {
-    background: #f5f1ff;
+    background: #fff1f1;
 }
-.fc-popover .fc-day-grid-event:first-child {
-	display: none;
+.fav-team--selected {
+	background: #f5f1ff;
 }
 .vote-up, .vote-down {
 	color: gray;

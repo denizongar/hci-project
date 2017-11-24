@@ -59,7 +59,7 @@ $(document).ready(function() {
 			homeLogo = teamLogo(event.teams[0]);
 			awayLogo = teamLogo(event.teams[1]);
 			var new_description =
-			'<div class="event text-center"><img class="event-team-logo rounded-circle" src="'+homeLogo+'" alt=""><img class="event-team-logo rounded-circle" src="'+awayLogo+'" alt=""></div>';
+			'<div class="event text-center"><img class="event-team-logo rounded-circle '+event.teams[0]+'" src="'+homeLogo+'" alt=""><img class="event-team-logo rounded-circle '+event.teams[1]+'" src="'+awayLogo+'" alt=""></div>';
 			element.append(new_description);
 		},
 		header: {
@@ -80,31 +80,31 @@ $(document).ready(function() {
 			cable: [],
 			bars: [['Barneys', '07:00 PM', '7km'], ['Pub One', '07:00 PM', '8km'], ['Leos', '07:30 PM', '11km']],
 			odds: [-155, +30]
-		},
-		{	
-			id: 'event2',
-			title: 'Event2',
-			start: '2017/11/8 18:30:00',
-			startt: '2017/11/8 18:30:00',
-			place: 'Investers Group Field',
-			teams: ['BOS', 'WAS'],
-			hRoster: ['Brook Lopez', 'Larry Nance Jr', 'Brandon Ingram', 'Kentavious Caldwell', 'Lonzo Ball'],
-			aRoster: ['Kyle Lowry', 'DeMar DeRozan', 'Norman Powell', 'Serge Ibaka', 'Jonas Valanciunas'],
-			cable: [],
-			bars: [['Barneys', '07:00 PM', '7km'], ['Pub One', '07:00 PM', '8km'], ['Leos', '07:30 PM', '11km']],
-			odds: [-155, +30]
 		},{	
-			id: 'event3',
-			title: 'Event3',
-			start: '2017/11/8 18:30:00',
-			startt: '2017/11/8 18:30:00',
+			id: 'event4',
+			title: 'Event4',
+			start: '2017/11/24 18:30:00',
+			startt: '2017/11/24 18:30:00',
 			place: 'Investers Group Field',
-			teams: ['DAL', 'SAC'],
+			teams: ['IND', 'LAC'],
 			hRoster: ['Brook Lopez', 'Larry Nance Jr', 'Brandon Ingram', 'Kentavious Caldwell', 'Lonzo Ball'],
 			aRoster: ['Kyle Lowry', 'DeMar DeRozan', 'Norman Powell', 'Serge Ibaka', 'Jonas Valanciunas'],
 			cable: [],
 			bars: [['Barneys', '07:00 PM', '7km'], ['Pub One', '07:00 PM', '8km'], ['Leos', '07:30 PM', '11km']],
-			odds: [-155, +30]
+			odds: [-12, +52]
+		}
+		,{	
+			id: 'event5',
+			title: 'Event5',
+			start: '2017/11/29 22:00:00',
+			startt: '2017/11/29 22:0:00',
+			place: 'Investers Group Field',
+			teams: ['TOR', 'ATL'],
+			hRoster: ['Brook Lopez', 'Larry Nance Jr', 'Brandon Ingram', 'Kentavious Caldwell', 'Lonzo Ball'],
+			aRoster: ['Kyle Lowry', 'DeMar DeRozan', 'Norman Powell', 'Serge Ibaka', 'Jonas Valanciunas'],
+			cable: [],
+			bars: [['Barneys', '07:00 PM', '7km'], ['Pub One', '07:00 PM', '8km'], ['Leos', '07:30 PM', '11km']],
+			odds: [-20, +36]
 		}
 		],
 
@@ -113,7 +113,13 @@ $(document).ready(function() {
 			$('#event-modal').modal();
 			$('#event-modal').find('.place').html(event.place);
 			$('#event-modal').find('.countdown').countdown(event.startt, function(event) {
-				$(this).text(event.strftime('%H:%M:%S'));
+				if(parseInt(event.strftime('%D')) == 0) {
+					$(this).text(event.strftime('%H:%M:%S'));
+				}
+				else {
+					$(this).text(event.strftime('%D days %H:%M:%S'));
+				}
+				
 				$(this).on('finish.countdown', function() {
 				    $(this).text("This game has ended");
 				});
@@ -159,17 +165,30 @@ $(document).ready(function() {
 					</select>`
 	$('.fc-left').append(favSelect);
 
-	// fav-footer display
+	// fav-footer display + highlight
 	$('#fav-team').change(function() {
 		favTeam = $('#fav-team :selected').text()
 		favTeamTri = $('#fav-team :selected').val()
+		favTeamTriClass = '.'+favTeamTri
+		if ($('.fc-event-container').find(favTeamTriClass).length>0) {
+			var dayNumber = $(favTeamTriClass).parents('.fc-event-container').index() + 1
+			var rightChild = '.fc-bg td:nth-child('+dayNumber+')'
+			
+			var rightParent = $(favTeamTriClass).parents('.fc-row')
+			$('.fc-bg').find('.fav-team--selected').removeClass('fav-team--selected')
+			rightParent.find(rightChild).addClass('fav-team--selected')
+		}
+		else {
+			$('.fc-bg').find('.fav-team--selected').removeClass('fav-team--selected')
+		}
+		
 		if (favTeam == "Favorite Team") {
 			$('.fav-footer').css('display', 'none');
 			$('#calendar').fullCalendar('option', 'height', 650);
 		}
 		else {
 			$('.fav-footer').css('display', 'flex')
-			$('#calendar').fullCalendar('option', 'height', 530);
+			$('#calendar').fullCalendar('option', 'height', 540);
 		}
 		$('.fav-logo').html('<img class="rounded-circle" src="'+teamLogo(favTeamTri)+'" alt=""/>')
 		$('.fav-record > span').html(Math.floor(Math.random()*10) + '-' + Math.floor(Math.random()*10))
@@ -231,6 +250,34 @@ $(document).ready(function() {
 	// ++++++++++++ STATS ++++++++++++
 	//
 
+	function playerPic(playerID, side) {
+
+		$.ajax ({
+			url: 'https://stats.nba.com/stats/commonplayerinfo/?playerid=' + playerID,
+			dataType:"jsonp",
+			success: function(response) {
+				var stat = response.resultSets[0].rowSet[0];
+				var name = stat[1]
+				var lastName = stat[2]
+				var tricode = stat[18]
+				var pic = 'https://nba-players.herokuapp.com/players/'+lastName+'/'+name
+
+				var styleRight = '<style>.stat-right .stat-player-info::after {background: url('+teamLogo(tricode)+') center center/100% no-repeat;}</style>'
+				var styleLeft = '<style>.stat-left .stat-player-info::after {background: url('+teamLogo(tricode)+') center center/100% no-repeat;}</style>'
+
+				if (side == 'left') {
+					$('head').append(styleLeft)
+					$('.stat-left .stat-player-info').prepend('<img src="'+pic+'" height="150px" width="auto" alt=""/>')
+				}
+				else {
+					$('head').append(styleRight)
+					$('.stat-right .stat-player-info').prepend('<img src="'+pic+'" height="150px" width="auto" alt=""/>')
+				}
+
+			}
+		})
+	}
+
 	function aa(side, conf) {
 		teamList = [];
 		$.each(json.teams, function(i, team) {
@@ -240,6 +287,7 @@ $(document).ready(function() {
 				+ '" alt="teamLogo" height="90px" width="90px" class="rounded-circle p-2 stat-team-list-logo" id="'
 				+ json.teams[i].tricode
 				+ '">'
+				console.log(side)
 				side == 'left' ? $('.stat-left .stat-teams').html(teamList) : $('.stat-right .stat-teams').html(teamList)
 			}
 		})
@@ -248,7 +296,7 @@ $(document).ready(function() {
 	function bb(tricode, side) {
 		var teamID = triToID(tricode);
 		var rosterArray = [];
-		var name = '<h3 class="team-banner-name">'+triToName(tricode)+'</h3>'
+		var name = '<h3 class="team-banner-name ml-2">'+triToName(tricode)+'</h3>'
 		var logo = '<img class="team-banner-logo ml-2" src="'+teamLogo(tricode)+'" alt=""/>'
 		var bannerInner =  logo + name
 		var styleRight = '<style>.stat-right .team-banner::after {background: url('+teamLogo(tricode)+') center center/100% no-repeat;}</style>'
@@ -338,7 +386,8 @@ $(document).ready(function() {
 		})
 	}
 	function dd(tricode, side) {
-		var name = '<h3 class="team-banner-name">'+triToName(tricode)+'</h3>'
+		console.log(tricode)
+		var name = '<h3 class="team-banner-name ml-2">'+triToName(tricode)+'</h3>'
 		var logo = '<img class="team-banner-logo ml-2" src="'+teamLogo(tricode)+'" alt=""/>'
 		var bannerInner =  logo + name
 		var styleRight = '<style>.stat-right .team-banner::after {background: url('+teamLogo(tricode)+') center center/100% no-repeat;}</style>'
@@ -419,9 +468,8 @@ $(document).ready(function() {
 					</div>`
 
 	statPlayer = `<div class="stat-player w-100">
-					<div class="d-flex flex-column align-items-center mr-5 my-3 stat-player-info">
-						<img src="https://via.placeholder.com/150x150" alt="" class="rounded-circle">
-						<span class="stat-player-name mt-3"></span>
+					<div class="d-flex align-items-center stat-player-info">
+						<h2 class="stat-player-name ml-3 mt-3"></h2>
 					</div>
 					<table class="table table-bordered w-100 float-right mb-0">
 						<tbody>
@@ -469,6 +517,7 @@ $(document).ready(function() {
 					$('.stat-right .stat-player-name').html($(this).find('.stat-t-player-name').html())
 				}
 				cc($(this).attr('id'), side)
+				playerPic($(this).attr('id'), side)
 			})
 		}
 		
@@ -514,13 +563,15 @@ $(document).ready(function() {
 					$('.stat-left').html(statTeam)
 					var teamName = triToName($(this).attr('id'))
 					$('.stat-left img').attr('src', teamLogo($(this).attr('id')));
+					dd($(this).attr('id'), 'left')
 				}
 				else {
 					$('.stat-right').html(statTeam)
 					var teamName = triToName($(this).attr('id'))
 					$('.stat-right img').attr('src', teamLogo($(this).attr('id')));
+					dd($(this).attr('id'), 'right')
 				}
-				dd($(this).attr('id'), side)
+				
 			});
 		}
 
@@ -592,7 +643,7 @@ $(document).ready(function() {
 	// ++++++++++++ NEWS ++++++++++++
 	//
 
-	var newsCard = `<div class="card news-card w-75 mb-3" id="" data-view="" data-vote="" data-time="" data-src="" ">
+	var newsCard = `<div class="card news-card w-75 mb-3" id="" data-view="0" data-vote="" data-time="" data-src="" ">
 					<img src="https://via.placeholder.com/600x250" alt="" class="card-img-top">
 					<div class="card-body">
 						<h4 class="card-title">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus molestiae</h4>
@@ -609,7 +660,26 @@ $(document).ready(function() {
 					</div>
 				</div>`
 
-	var youtubeCard;
+	var youtubeCard = `<div class="card news-card card-youtube w-75 mb-3" id="" data-view="" data-vote="" data-time="" data-src="">
+	<div class="card-yt-body d-flex">
+		<img src="https://via.placeholder.com/250x150" alt="">
+		<div class="mx-3 mt-3">
+			<h5 class="mb-0">Lorem ipsum dolor sit amet, elitas Accusamus molestiae</h5>
+			<p class="card-text d-inline mr-2 card-channel"><small class="text-muted">NBA</small></p>
+			<p class="card-text d-inline mr-2 card-view"><small class="text-muted">25k views</small></p>
+			<p class="card-text d-inline card-time"><small class="text-muted">20 hours ago</small></p>
+			<p class="card-text card-desc"><small class="text-muted">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt...</small></p>
+		</div>
+	</div>
+	<div class="d-flex bg-light justify-content-between align-items-center py-1 px-3 card-actions">
+		<div class="card-vote">
+			<a class="vote-up" href="#"><span class="oi oi-plus"></span></a>
+			<span class="mx-2 vote-count">250</span>
+			<a class="vote-down" href="#"><span class="oi oi-minus"></span></a>
+		</div>
+	</div>
+</div>`
+
 
 	var newsTeams = ['celtics', 'raptors', 'lakers', 'hawks']
 	var newsSidebar = `<a class="btn btn-secondary btn-block btn-sm mt-2 source-button" data-toggle="collapse" href="" aria-expanded="false" aria-controls=""></a>
@@ -628,13 +698,18 @@ $(document).ready(function() {
 	// 	youtube: {},
 	// 	highlights: {}
 	// }
-	trade = ['realgm', 'sbnation', 'si', 'hoopshype']
-	injury = ['rotoworld', 'cbssports', 'vegasinsider']
-	gossip = ['tmz', 'yardbarker', 'mirror', 'theringer']
-	author = ['billsimmons', 'dannychau', 'johngonzalez', 'adrianarowski']
+	var trade = ['realgm', 'sbnation', 'si', 'hoopshype']
+	var injury = ['rotoworld', 'cbssports', 'vegasinsider']
+	var gossip = ['tmz', 'yardbarker', 'mirror', 'theringer']
+	var author = ['billsimmons', 'dannychau', 'johngonzalez', 'adrianarowski']
+	var channel = ['nba', 'espn', 'xima', 'deo']
+
 
 	for (var i = 0; i < 50; i++) {
 		$('.news-cards').append(newsCard)
+	}
+	for (var i = 0; i < 10; i++) {
+		$('.news-cards').append(youtubeCard)
 	}
 
 	$.each($('.news-card'), function(i, val) {
@@ -677,6 +752,12 @@ $(document).ready(function() {
 	});
 	$.each($('.card-author'), function() {
 		$(this).addClass(author[Math.floor(Math.random()*author.length)])
+	});
+	$.each($('.card-youtube'), function() {
+		var views = Math.floor(Math.random()*99)
+		$(this).addClass(channel[Math.floor(Math.random()*channel.length)])
+		$(this).find('.card-view .text-muted').html(views + 'k views')
+		$(this).attr('data-view', views)
 	});
 
 	$('.vote-up').click(function() {
@@ -733,10 +814,12 @@ $(document).ready(function() {
 	  layoutMode: 'vertical',
 	  getSortData: {
 	  	vote: '[data-vote] parseInt',
-	  	time: '[data-time] parseInt'
+	  	time: '[data-time] parseInt',
+	  	view: '[data-view] parseInt'
 	  },
 	  sortAscending: {
-	      vote: false
+	      vote: false,
+	      view: false
 	  }
 	});
 
