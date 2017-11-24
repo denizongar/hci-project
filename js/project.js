@@ -401,7 +401,14 @@ $(document).ready(function() {
 	$('.pot-player').click(function() {
 		function playerSelect(side) {
 			$('.stat-team-list-logo').click(function() {
-				side == 'left' ? $('.stat-left').html(statPlayerList) : $('.stat-right').html(statPlayerList)
+				if (side == 'left') {
+					$('.left-bc .breadcrumb').append('<li class="breadcrumb-item active" aria-current="page">Player</li>')
+					$('.stat-left').html(statPlayerList)
+				}
+				else {
+					$('.right-bc .breadcrumb').append('<li class="breadcrumb-item active" aria-current="page">Player</li>')
+					$('.stat-right').html(statPlayerList)
+				}
 				bb($(this).attr('id'), side)
 				displayPlayerStats(side)
 			});
@@ -421,30 +428,34 @@ $(document).ready(function() {
 			})
 		}
 		
-		
+		$('.breadcrumb').append('<li class="breadcrumb-item active" aria-current="page">Conference</li>')
 		$('.pot').remove();
 		$('.stat-card').append(statConf)
 		$('.stats-container').append(statButtons)
 
 		$('.stat-left > .stat-conf__w').click(function() {
+			$('.left-bc .breadcrumb').append('<li class="breadcrumb-item active" aria-current="page">Team</li>')
 			$('.stat-left').html(statTeams)
 			aa('left', 'west')
 			$('.stat-buttons').remove();
 			playerSelect('left')
 		});
 		$('.stat-left > .stat-conf__e').click(function() {
+			$('.left-bc .breadcrumb').append('<li class="breadcrumb-item active" aria-current="page">Team</li>')
 			$('.stat-left').html(statTeams)
 			aa('left', 'east')
 			$('.stat-buttons').remove();
 			playerSelect('left')
 		});
 		$('.stat-right > .stat-conf__e').click(function() {
+			$('.right-bc .breadcrumb').append('<li class="breadcrumb-item active" aria-current="page">Team</li>')
 			$('.stat-right').html(statTeams)
 			aa('right', 'east')
 			$('.stat-buttons').remove();
 			playerSelect('right')
 		});
 		$('.stat-right > .stat-conf__w').click(function() {
+			$('.right-bc .breadcrumb').append('<li class="breadcrumb-item active" aria-current="page">Team</li>')
 			$('.stat-right').html(statTeams)
 			aa('right', 'west')
 			$('.stat-buttons').remove();
@@ -469,30 +480,35 @@ $(document).ready(function() {
 				dd($(this).attr('id'), side)
 			});
 		}
-
+		
+		$('.breadcrumb').append('<li class="breadcrumb-item active" aria-current="page">Conference</li>')
 		$('.pot').remove();
 		$('.stat-card').append(statConf)
 		$('.stats-container').append(statButtons)
 
 		$('.stat-left > .stat-conf__w').click(function() {
+			$('.left-bc .breadcrumb').append('<li class="breadcrumb-item active" aria-current="page">Team</li>')
 			$('.stat-left').html(statTeams)
 			aa('left', 'west')
 			$('.stat-buttons').remove();
 			teamSelect('left');
 		});
 		$('.stat-left > .stat-conf__e').click(function() {
+			$('.left-bc .breadcrumb').append('<li class="breadcrumb-item active" aria-current="page">Team</li>')
 			$('.stat-left').html(statTeams)
 			aa('left', 'east')
 			$('.stat-buttons').remove();
 			teamSelect('left');
 		});
 		$('.stat-right > .stat-conf__w').click(function() {
+			$('.right-bc .breadcrumb').append('<li class="breadcrumb-item active" aria-current="page">Team</li>')
 			$('.stat-right').html(statTeams)
 			aa('right', 'west')
 			$('.stat-buttons').remove();
 			teamSelect('right');
 		});
 		$('.stat-right > .stat-conf__e').click(function() {
+			$('.right-bc .breadcrumb').append('<li class="breadcrumb-item active" aria-current="page">Team</li>')
 			$('.stat-right').html(statTeams)
 			aa('right', 'east')
 			$('.stat-buttons').remove();

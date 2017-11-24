@@ -17,7 +17,7 @@
 	background-color: #785da2;
 }
 .fc .fc-toolbar > * > * {
-    float: left !important;
+	float: left !important;
 }
 .bg-light-purple {
 	background-color: #bbacd1;
@@ -59,6 +59,23 @@
 	cursor: pointer;
 	background-color: #e3dcee;
 }
+.btn-glossary {
+	padding: 0 .5rem;
+}
+#glossary {
+	margin-top: 3px;
+}
+#glossary ul{
+	margin-bottom: 0;
+}
+.bc-container .col{
+	padding: 0;
+}
+.bc-container .breadcrumb {
+	background-color: #fff;
+	padding: 0;
+	margin-bottom: 0;
+}
 .nav-community:hover {
 	cursor: not-allowed;
 	background-color: #fff;
@@ -90,10 +107,10 @@
 	display: none;
 }
 .fc-popover .event {
-    margin-bottom: 10px;
+	margin-bottom: 10px;
 }
 .fc-popover .event:last-child {
-    margin-bottom: 0;
+	margin-bottom: 0;
 }
 .event-team-logo {
 	height: 40px;
@@ -144,12 +161,12 @@
 }
 .modal-stats {
 	position: absolute;
-    left: 50%;
-    transform: translate(-50%);
-    top: 207px;
-    background: rgba(255,255,255,.7);
-    padding: 31px 23px;
-    border-radius: 47px;
+	left: 50%;
+	transform: translate(-50%);
+	top: 207px;
+	background: rgba(255,255,255,.7);
+	padding: 31px 23px;
+	border-radius: 47px;
 }
 .modal-team-logo {
 	position: absolute;
@@ -159,7 +176,7 @@
 	width: 107px;
 }
 .home img {
-    left: 143px;
+	left: 143px;
 }
 .away img {
 	right: 143px;
@@ -169,10 +186,10 @@
 	top: 222px;
 	min-width: 40px;
 	background: rgba(255,255,255,.7);
-    border-radius: 3px;
-    padding: 3px;
-    color: #505050;
-    text-align: center;
+	border-radius: 3px;
+	padding: 3px;
+	color: #505050;
+	text-align: center;
 }
 .home-odds {
 	left: 80px;
