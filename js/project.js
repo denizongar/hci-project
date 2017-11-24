@@ -287,7 +287,6 @@ $(document).ready(function() {
 				+ '" alt="teamLogo" height="90px" width="90px" class="rounded-circle p-2 stat-team-list-logo" id="'
 				+ json.teams[i].tricode
 				+ '">'
-				console.log(side)
 				side == 'left' ? $('.stat-left .stat-teams').html(teamList) : $('.stat-right .stat-teams').html(teamList)
 			}
 		})
@@ -386,7 +385,6 @@ $(document).ready(function() {
 		})
 	}
 	function dd(tricode, side) {
-		console.log(tricode)
 		var name = '<h3 class="team-banner-name ml-2">'+triToName(tricode)+'</h3>'
 		var logo = '<img class="team-banner-logo ml-2" src="'+teamLogo(tricode)+'" alt=""/>'
 		var bannerInner =  logo + name
@@ -492,33 +490,41 @@ $(document).ready(function() {
 	
 	$('.pot-player').click(function() {
 		function playerSelect(side) {
-			$('.stat-team-list-logo').click(function() {
-				if (side == 'left') {
+			if (side == 'left') {
+				$('.stat-left .stat-team-list-logo').click(function() {
 					$('.left-bc .breadcrumb').append('<li class="breadcrumb-item active" aria-current="page">Player</li>')
 					$('.stat-left').html(statPlayerList)
-				}
-				else {
+					bb($(this).attr('id'), side)
+					displayPlayerStats(side)
+				});
+			}
+			else {
+				$('.stat-right .stat-team-list-logo').click(function() {
 					$('.right-bc .breadcrumb').append('<li class="breadcrumb-item active" aria-current="page">Player</li>')
 					$('.stat-right').html(statPlayerList)
-				}
-				bb($(this).attr('id'), side)
-				displayPlayerStats(side)
-			});
+					bb($(this).attr('id'), side)
+					displayPlayerStats(side)
+				});
+			}
 		}
 
 		function displayPlayerStats(side) {
-			$('tbody').on("click",".stat-t-player", function() {
-				if (side == 'left') {
+			if (side == 'left') {
+				$('.stat-left tbody').on("click",".stat-t-player", function() {
 					$('.stat-left').html(statPlayer)
 					$('.stat-left .stat-player-name').html($(this).find('.stat-t-player-name').html())
-				}
-				else {
+					cc($(this).attr('id'), side)
+					playerPic($(this).attr('id'), side)
+				})
+			}
+			else {
+				$('.stat-right tbody').on("click",".stat-t-player", function() {
 					$('.stat-right').html(statPlayer)
 					$('.stat-right .stat-player-name').html($(this).find('.stat-t-player-name').html())
-				}
-				cc($(this).attr('id'), side)
-				playerPic($(this).attr('id'), side)
-			})
+					cc($(this).attr('id'), side)
+					playerPic($(this).attr('id'), side)
+				})
+			}
 		}
 		
 		$('.breadcrumb').append('<li class="breadcrumb-item active" aria-current="page">Conference</li>')
@@ -558,21 +564,24 @@ $(document).ready(function() {
 
 	$('.pot-team').click(function() {
 		function teamSelect(side) {
-			$('.stat-team-list-logo').click(function() {
-				if (side == 'left') {
+			if (side == 'left') {
+				$('.stat-left .stat-team-list-logo').click(function() {
+					var logoURL = teamLogo($(this).attr('id'))
+					var teamName = triToName($(this).attr('id'))
 					$('.stat-left').html(statTeam)
-					var teamName = triToName($(this).attr('id'))
-					$('.stat-left img').attr('src', teamLogo($(this).attr('id')));
+					$('.stat-left img').attr('src', logoURL);
 					dd($(this).attr('id'), 'left')
-				}
-				else {
-					$('.stat-right').html(statTeam)
+				});
+			}
+			else {
+				$('.stat-right .stat-team-list-logo').click(function() {
+					var logoURL = teamLogo($(this).attr('id'))
 					var teamName = triToName($(this).attr('id'))
-					$('.stat-right img').attr('src', teamLogo($(this).attr('id')));
+					$('.stat-right').html(statTeam)
+					$('.stat-right img').attr('src', logoURL);
 					dd($(this).attr('id'), 'right')
-				}
-				
-			});
+				});
+			}
 		}
 
 		$('.breadcrumb').append('<li class="breadcrumb-item active" aria-current="page">Conference</li>')
@@ -832,7 +841,6 @@ $(document).ready(function() {
 	});
 	$('.news-sidebar').on('click', '.btn', function() {
 		var filterVal = '.' + $(this).attr('data-filter')
-		console.log(filterVal)
 		$grid.isotope({
 			filter: filterVal
 		});
