@@ -93,24 +93,35 @@
 .navbarr {
 	margin: 20px 0;
 }
-.nav-circle {
+.nav-item {
+	border: 1px solid #ded1f2;
+	border-radius: 2px;
 	width: 100px;
-	height: 100px;
-	line-height: 100px;
 	text-align: center;
 }
+.nav-item:first-child {
+	margin-right: 30px;
+}
+.nav-item--active {
+	background-color: #bbacd1;
+	color: #fff;
+}
+.nav-item:last-child {
+	margin-left: 30px;
+}
 .hub-logo {
-	width: 100px;
-	height: 100px;
-	line-height: 100px;
 	text-align: center;
+	font-size: 30px;
+	font-weight: 700;
+	margin: 0 30px;
 }
 .hub-logo:hover {
 	cursor: default;
 }
-.nav-circle:hover {
+.nav-item:hover {
 	cursor: pointer;
-	background-color: #e3dcee;
+	background-color: #a690c5;
+	color: #fff;
 }
 .btn-glossary {
 	padding: 0 .5rem;
@@ -178,7 +189,7 @@
 .fav-footer {
 	margin-top: 1em;
 	border: 1px solid #ddd;
-	background-color: #f5f1ff
+	background-color: #f5f1ff;
 }
 .fav-footer .col {
 	border-right: 1px solid #ddd;

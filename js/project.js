@@ -1,17 +1,17 @@
 $(document).ready(function() {
-	$('.nav-circle').click(function() {
+	$('.nav-item').click(function() {
 		window.location.href = $(this).attr('data-href');
 	});
 	var currURL = $(location).attr('href');
 
 	if (~currURL.indexOf("index.html")) {
-		$('.nav-calendar').addClass('bg-light-purple')
+		$('.nav-calendar').addClass('nav-item--active')
 	}
 	else if (~currURL.indexOf("stats.html")) {
-		$('.nav-stats').addClass('bg-light-purple')
+		$('.nav-stats').addClass('nav-item--active')
 	}
 	else if (~currURL.indexOf("news.html")) {
-		$('.nav-news').addClass('bg-light-purple')
+		$('.nav-news').addClass('nav-item--active')
 	}
 
 	function teamLogo(tricode) {
@@ -37,7 +37,7 @@ $(document).ready(function() {
 
 	// fullCalendar
 	$('#calendar').fullCalendar({
-		height: 650,
+		height: 700,
 		eventBackgroundColor: 'rgba(0,0,0,0)',
 		eventBorderColor: 'rgba(0,0,0,0)',
 		bootstrapGlyphicons: false,
@@ -183,12 +183,12 @@ $(document).ready(function() {
 		}
 		
 		if (favTeam == "Favorite Team") {
-			$('.fav-footer').css('display', 'none');
-			$('#calendar').fullCalendar('option', 'height', 650);
+			$('.fav-footer').addClass('d-none');
+			$('#calendar').fullCalendar('option', 'height', 700);
 		}
 		else {
-			$('.fav-footer').css('display', 'flex')
-			$('#calendar').fullCalendar('option', 'height', 540);
+			$('.fav-footer').addClass('d-flex animated')
+			$('#calendar').fullCalendar('option', 'height', 580);
 		}
 		$('.fav-logo').html('<img class="rounded-circle" src="'+teamLogo(favTeamTri)+'" alt=""/>')
 		$('.fav-record > span').html(Math.floor(Math.random()*10) + '-' + Math.floor(Math.random()*10))
