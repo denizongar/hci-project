@@ -587,7 +587,7 @@ $(document).ready(function() {
 			}
 		}
 		
-		$('.stats-container > h4').html('Compare players')
+		$('.stats-container > h4').html('Compare teams')
 		$('.breadcrumb').append('<li class="breadcrumb-item active" aria-current="page">Conference</li>')
 		$('.pot').remove();
 		$('.stat-card').append(statConf)
