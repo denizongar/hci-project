@@ -147,6 +147,12 @@
 .pot:hover, .stat-conf:hover, .stat-team-list-logo:hover, .stat-t-player:hover {
 	cursor: pointer;
 }
+.stat-search {
+	width: calc(100% - 60px);
+}
+.btn__stat-search {
+	padding: .8rem 1rem;
+}
 .nav-circle:not(:first-child):not(:last-child) {
 	margin: 0 20px;
 }
