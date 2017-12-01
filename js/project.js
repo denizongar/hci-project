@@ -902,6 +902,34 @@ $(document).ready(function() {
 			$('.news-content-actions').find('.dropdown-toggle').html(sortValue)
 		});
 	});
+
+		var side1 = 'left'
+		$('.btn__stat-search').on('click', function() {
+		
+		var value = $('.stat-search').val()
+		index = elasticlunr(function () {
+	    	this.addField('fullName');
+	    	this.addField('nickname');
+	    	this.setRef('tricode');
+		});
+
+		for (var i = 0; i < json.teams.length; i++) {
+			index.addDoc(json.teams[i])
+		}
+		if (side1 == 'left') {
+			var ref = index.search(value)
+			$('.pot').remove();
+			$('.stat-left').html(statTeam)
+			dd(ref[0].ref, side1)
+			side1 = 'right'
+		}
+		else {
+			var ref = index.search(value)
+			$('.pot').remove();
+			$('.stat-right').html(statTeam)
+			dd(ref[0].ref, side1)
+		}
+	})
 });
 
 json = {

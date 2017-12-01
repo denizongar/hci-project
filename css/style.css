@@ -151,7 +151,7 @@
 	width: calc(100% - 60px);
 }
 .btn__stat-search {
-	padding: .8rem 1rem;
+	padding: .813rem 1rem;
 }
 .nav-circle:not(:first-child):not(:last-child) {
 	margin: 0 20px;
