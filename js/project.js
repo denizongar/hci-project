@@ -402,7 +402,8 @@ $(document).ready(function() {
 		var name = '<h3 class="team-banner-name ml-2">'+triToName(tricode)+'</h3>'
 		var logo = '<img class="team-banner-logo ml-2" src="'+teamLogo(tricode)+'" alt=""/>'
 		var advanced = '<button type="button" disabled class="btn btn-primary btn-sm ml-auto mr-3">Advanced Stats</button>'
-		var bannerInner =  logo + name + advanced
+		// var bannerInner =  logo + name + advanced
+		var bannerInner =  logo + name
 		var styleRight = '<style>.stat-right .team-banner::after {background: url('+teamLogo(tricode)+') center center/100% no-repeat;}</style>'
 		var styleLeft = '<style>.stat-left .team-banner::after {background: url('+teamLogo(tricode)+') center center/100% no-repeat;}</style>'
 
@@ -483,13 +484,13 @@ $(document).ready(function() {
 	statPlayer = `<div class="stat-player w-100">
 					<div class="d-flex align-items-center stat-player-info">
 						<h2 class="stat-player-name ml-3 mt-3"></h2>
-						<button type="button" disabled class="btn btn-primary btn-sm ml-auto mr-3 mt-3">Advanced Stats</button>
 					</div>
 					<table class="table table-bordered w-100 float-right mb-0">
 						<tbody>
 						</tbody>
 					</table>
 				</div>`
+// 	<button type="button" disabled class="btn btn-primary btn-sm ml-auto mr-3 mt-3">Advanced Stats</button>
 
 	statTeam = `<div class="stat-team w-100">
 					<div class="team-banner w-100 d-flex align-items-center"></div>
@@ -547,34 +548,34 @@ $(document).ready(function() {
 		$('.breadcrumb').append('<li class="breadcrumb-item active" aria-current="page">Conference</li>')
 		$('.pot').remove();
 		$('.stat-card').append(statConf)
-		$('.stats-container').append(statButtons)
+		// $('.stats-container').append(statButtons)
 
 		$('.stat-left > .stat-conf__w').click(function() {
 			$('.left-bc .breadcrumb').append('<li class="breadcrumb-item active" aria-current="page">Team</li>')
 			$('.stat-left').html(statTeams)
 			aa('left', 'west')
-			$('.stat-buttons').remove();
+			// $('.stat-buttons').remove();
 			playerSelect('left')
 		});
 		$('.stat-left > .stat-conf__e').click(function() {
 			$('.left-bc .breadcrumb').append('<li class="breadcrumb-item active" aria-current="page">Team</li>')
 			$('.stat-left').html(statTeams)
 			aa('left', 'east')
-			$('.stat-buttons').remove();
+			// $('.stat-buttons').remove();
 			playerSelect('left')
 		});
 		$('.stat-right > .stat-conf__e').click(function() {
 			$('.right-bc .breadcrumb').append('<li class="breadcrumb-item active" aria-current="page">Team</li>')
 			$('.stat-right').html(statTeams)
 			aa('right', 'east')
-			$('.stat-buttons').remove();
+			// $('.stat-buttons').remove();
 			playerSelect('right')
 		});
 		$('.stat-right > .stat-conf__w').click(function() {
 			$('.right-bc .breadcrumb').append('<li class="breadcrumb-item active" aria-current="page">Team</li>')
 			$('.stat-right').html(statTeams)
 			aa('right', 'west')
-			$('.stat-buttons').remove();
+			// $('.stat-buttons').remove();
 			playerSelect('right')
 		});
 	});
@@ -605,34 +606,34 @@ $(document).ready(function() {
 		$('.breadcrumb').append('<li class="breadcrumb-item active" aria-current="page">Conference</li>')
 		$('.pot').remove();
 		$('.stat-card').append(statConf)
-		$('.stats-container').append(statButtons)
+		// $('.stats-container').append(statButtons)
 
 		$('.stat-left > .stat-conf__w').click(function() {
 			$('.left-bc .breadcrumb').append('<li class="breadcrumb-item active" aria-current="page">Team</li>')
 			$('.stat-left').html(statTeams)
 			aa('left', 'west')
-			$('.stat-buttons').remove();
+			// $('.stat-buttons').remove();
 			teamSelect('left');
 		});
 		$('.stat-left > .stat-conf__e').click(function() {
 			$('.left-bc .breadcrumb').append('<li class="breadcrumb-item active" aria-current="page">Team</li>')
 			$('.stat-left').html(statTeams)
 			aa('left', 'east')
-			$('.stat-buttons').remove();
+			// $('.stat-buttons').remove();
 			teamSelect('left');
 		});
 		$('.stat-right > .stat-conf__w').click(function() {
 			$('.right-bc .breadcrumb').append('<li class="breadcrumb-item active" aria-current="page">Team</li>')
 			$('.stat-right').html(statTeams)
 			aa('right', 'west')
-			$('.stat-buttons').remove();
+			// $('.stat-buttons').remove();
 			teamSelect('right');
 		});
 		$('.stat-right > .stat-conf__e').click(function() {
 			$('.right-bc .breadcrumb').append('<li class="breadcrumb-item active" aria-current="page">Team</li>')
 			$('.stat-right').html(statTeams)
 			aa('right', 'east')
-			$('.stat-buttons').remove();
+			// $('.stat-buttons').remove();
 			teamSelect('right');
 		});
 	})
