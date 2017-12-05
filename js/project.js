@@ -738,6 +738,11 @@ $(document).ready(function() {
 		'NBA: Heat snap Celtics\' unbeaten run, 4 other NBA win streaks whose end came as a surprise',
 		'How Under Armour learned from mistakes to make the Curry 4'
 	]
+	var exArtText = 'Raptors paying extra attention to rest – the NBA’s new PED'
+	var exArtURL = 'http://www.sportsnet.ca/basketball/nba/raptors-vanvleet-paying-extra-attention-rest-nbas-new-ped/'
+	var exArtSrc = 'sportsnet.ca'
+	var exArtTeam = 'raptors'
+	var exArtImg = './img/example.jpg'
 
 
 	for (var i = 0; i < 50; i++) {
@@ -748,10 +753,20 @@ $(document).ready(function() {
 	}
 
 	$.each($('.news-card'), function(i, val) {
-		imgSrc = './img/'+parseInt(i+1)+'.jpg'
+		var imgSrc = './img/'+parseInt(i+1)+'.jpg'
 		if (i < 5) {
 			$(this).find('.news-image').attr('src', imgSrc)
 			$(this).find('h4').html(newsTexts[i])
+		}
+		else if (i == 5) {
+			$(this).find('.news-image').attr('src', exArtImg)
+			$(this).find('h4').html(exArtText)
+			$(this).addClass(exArtSrc)
+			$(this).find('small').html(exArtSrc)
+			$(this).addClass('card-team')
+			$(this).find('.card-team-name > small').html(exArtTeam)
+			$(this).addClass(exArtTeam)
+			$(this).wrap('<a style="color:unset;" href="'+exArtURL+'"></a>')
 		}
 	})
 
@@ -836,9 +851,12 @@ $(document).ready(function() {
 
 	$.each($('.news-card'), function() {
 		var team = newsTeams[Math.floor(Math.random()*newsTeams.length)]
-		$(this).addClass('card-team')
-		$(this).find('.card-team-name > small').html(team)
-		$(this).addClass(team)
+		if (!($(this).hasClass('raptors'))) {
+			$(this).addClass('card-team')
+			$(this).find('.card-team-name > small').html(team)
+			$(this).addClass(team)
+		}
+		
 	});
 
 	$.each($('.news-card'), function() {
